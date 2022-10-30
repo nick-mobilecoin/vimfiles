@@ -244,9 +244,12 @@ set noshowmode
 " }}}
 
 " FZF {{{
-" Use the faster 'fd' command, note this has to be installed, might do a check
-" for it later...
-let $FZF_DEFAULT_COMMAND='fd --type f'
+" Use the faster 'fd' command, note this has to be installed
+if executable('fdfind')
+    let $FZF_DEFAULT_COMMAND='fdfind --type f'
+elseif executable('fd')
+    let $FZF_DEFAULT_COMMAND='fd --type f'
+endif
 
 " Give CTRL-P command via FZF
  nnoremap <silent> <c-p> :Files<CR>

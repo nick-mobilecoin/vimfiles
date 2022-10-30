@@ -20,3 +20,6 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 3. Launch vim/gvim and install the plugins using `:PlugInstall`
 
 4. Re-launch vim/gvim
+
+5. install necessary [COC language servers](https://github.com/neoclide/coc.nvim/wiki/Language-servers#contents).
+
