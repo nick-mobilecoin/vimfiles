@@ -27,6 +27,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
+
 "This one has backup files put into a different directory
 "Note the "//" this expands the path of the current file so that you can
 "edit more than one file with the same name in different directories
@@ -177,8 +178,8 @@ nnoremap <leader>k <c-w>k
 nnoremap <leader>l <c-w>l
 
 " Bind the up and down keys to go through the error list
-" nnoremap <silent> <Up> :cprev<CR>
-" nnoremap <silent> <Down> :cnext<CR>
+nnoremap <silent> <Up> :cprev<CR>
+nnoremap <silent> <Down> :cnext<CR>
 
 "easier page down and up commands"
 nnoremap <leader>d <c-f>
@@ -263,7 +264,7 @@ nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gl :Glog<CR>
 nnoremap <leader>gd :Gvdiff<CR>
-nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gb :Git blame<CR>
 nnoremap <leader>gm :Gvdiff origin/master<CR>
 nnoremap <leader>gw :Gwrite<CR>
 nnoremap <leader>gr :Gread<CR>
@@ -290,4 +291,39 @@ nnoremap <leader>nf :NERDTreeFind<CR>
 "commands
 let g:NERDTreeQuitOnOpen=1
 
+" }}}
+
+" COC settings --------------------------{{{
+augroup jumpdef
+    autocmd!
+    autocmd FileType rust nmap <buffer> <silent> <c-]> <Plug>(coc-definition)<esc>
+augroup END
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 " }}}
