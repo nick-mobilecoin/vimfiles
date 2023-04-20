@@ -5,6 +5,9 @@ if filereadable(s:host_vimrc)
   execute 'source ' . s:host_vimrc
 endif
 
+" no sounds please
+set belloff=all
+
 " Make most things happy, we aren't in 1970 anymore
 set nocompatible
 set encoding=utf-8
@@ -260,12 +263,12 @@ endif
 " fugitive/git settings --------------------------{{{
 " Going to use the 'g' prefix to signify git commands
 " So basically everything will be <leader>g<something>
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gc :Gcommit<CR>
-nnoremap <leader>gl :Glog<CR>
-nnoremap <leader>gd :Gvdiff<CR>
+nnoremap <leader>gs :Git<CR>
+nnoremap <leader>gc :Git commit<CR>
+nnoremap <leader>gl :Gclog<CR>
+nnoremap <leader>gd :Gvdifsplitf<CR>
 nnoremap <leader>gb :Git blame<CR>
-nnoremap <leader>gm :Gvdiff origin/master<CR>
+nnoremap <leader>gm :Gvdiffsplit origin/main<CR>
 nnoremap <leader>gw :Gwrite<CR>
 nnoremap <leader>gr :Gread<CR>
 
@@ -275,7 +278,7 @@ nnoremap <leader>gr :Gread<CR>
 nnoremap <leader>gp :call Safepush()<CR>
 function! Safepush()
 let l:branchname = fugitive#head()
-if l:branchname ==? 'master'
+if l:branchname ==? 'main'
     echo 'Not pushing, this is a mainline branch: "' . l:branchname . '"'
 else
     execute ":Git push"

@@ -1,0 +1,35 @@
+" This file is meant to be sourced by the ~/.ideavimrc file.  It is separate
+" from the standard ~/vimfiles/vimrc because I've ran into issues with some
+" special syntax in the normal vimrc file.
+
+" Nicer searching
+set ignorecase
+set incsearch
+set smartcase
+
+" Line numbers TODO need to make this smarter, want relative when in a buffer,
+" full when outside of a buffer
+set relativenumber
+
+set scrolloff 3
+
+" Mappings
+inoremap jk <esc>
+
+" Use space a the main leader, ideavim doesn't seem to work with <space>
+let mapleader=" "
+let maplocalleader="\<enter>"
+
+nmap <leader>h <c-w>h
+nmap <leader>j <c-w>j
+nmap <leader>k <c-w>k
+nmap <leader>l <c-w>l
+
+" Mimic commentary
+nnoremap gcc :action CommentByLineComment <cr>
+vnoremap gc :action CommentByLineComment <cr>
+
+" Close all other tabs
+nnoremap X :action CloseAllEditorsButActive <cr>
+
+set ideajoin
