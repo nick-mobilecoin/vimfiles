@@ -183,6 +183,8 @@ nnoremap <leader>l <c-w>l
 " Bind the up and down keys to go through the error list
 nnoremap <silent> <Up> :cprev<CR>
 nnoremap <silent> <Down> :cnext<CR>
+nnoremap <silent> <Left> :colder<CR>
+nnoremap <silent> <Right> :cnewer<CR>
 
 "easier page down and up commands"
 nnoremap <leader>d <c-f>
