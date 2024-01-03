@@ -29,6 +29,7 @@ Plug 'SirVer/ultisnips'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'mracos/mermaid.vim'
 call plug#end()
 
 "This one has backup files put into a different directory
@@ -299,10 +300,12 @@ let g:NERDTreeQuitOnOpen=1
 " }}}
 
 " COC settings --------------------------{{{
-augroup jumpdef
-    autocmd!
-    autocmd FileType rust nmap <buffer> <silent> <c-]> <Plug>(coc-definition)<esc>
-augroup END
+
+nmap <c-]> <Plug>(coc-definition)
+" augroup jumpdef
+"     autocmd!
+"     autocmd FileType rust nmap <buffer> <silent> <c-]> <Plug>(coc-definition)<esc>
+" augroup END
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: There's always complete item selected by default, you may want to enable
