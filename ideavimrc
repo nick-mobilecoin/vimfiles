@@ -1,35 +1,56 @@
-" This file is meant to be sourced by the ~/.ideavimrc file.  It is separate
-" from the standard ~/vimfiles/vimrc because I've ran into issues with some
-" special syntax in the normal vimrc file.
-
-" Nicer searching
-set ignorecase
-set incsearch
-set smartcase
-
-" Line numbers TODO need to make this smarter, want relative when in a buffer,
-" full when outside of a buffer
-set relativenumber
-
-set scrolloff 3
-
-" Mappings
-inoremap jk <esc>
-
-" Use space a the main leader, ideavim doesn't seem to work with <space>
-let mapleader=" "
+set surround
+set easymotion
+set commentary
+let mapleader =" "
 let maplocalleader="\<enter>"
 
-nmap <leader>h <c-w>h
-nmap <leader>j <c-w>j
-nmap <leader>k <c-w>k
-nmap <leader>l <c-w>l
+set relativenumber
+set number
 
-" Mimic commentary
-nnoremap gcc :action CommentByLineComment <cr>
-vnoremap gc :action CommentByLineComment <cr>
+inoremap jk <Esc>
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=3
 
-" Close all other tabs
-nnoremap X :action CloseAllEditorsButActive <cr>
+" Do incremental searching.
+set incsearch
+set ignorecase
 
+" jump windows easier
+nnoremap <leader>h <C-w>h
+nnoremap <leader>l <C-w>l
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+
+" Make ctrl+p work like other ides
+nnoremap <c-p> :action GotoFile<CR>
+
+" Close all other tabs, I do this a bunch in the browser
+nnoremap X :action CloseAllEditorsButActive<CR>
+
+nnoremap ]c :action Diff.NextChange<CR>
+nnoremap [c :action Diff.PrevChange<CR>
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
+
+" Find more examples here: https://jb.gg/share-ideavimrc
+map <leader>gb <Action>(Annotate)
 set ideajoin
+
+nnoremap ]s :action GotoNextError<CR>
+nnoremap [s :action GotoPreviousError<CR>
+
+nnoremap s diw"0P
+nnoremap S "xyiw:%s/\<<C-r>x\>/<C-r>0/g<cr>
+vnoremap s "0P
+vnoremap S "xy:%s/\<<C-r>x\>/<C-r>0/g<cr>
+nnoremap <leader>sv :source ~/.ideavimrc <cr>
