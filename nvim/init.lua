@@ -27,7 +27,7 @@ vim.keymap.set('n', '<leader>ev', ':vsplit $MYVIMRC <cr>', { noremap = true, sil
 vim.keymap.set('n', '<esc><esc>', ':nohlsearch<cr>:<esc>', { noremap = true, silent = true })
 vim.keymap.set('n', '<Up>', ':cprev<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<Down>', ':cnext<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<localleader>f', ':grep! "\b<C-r><C-W>\b"<cr>:cw<cr>', { noremap = true })
+vim.keymap.set('n', '<localleader>f', ':grep! "\\<<C-r><C-W>\\>"<cr>:cw<cr>', { noremap = true })
 vim.keymap.set('n', 's', 'diw"0P', { noremap = true })
 vim.keymap.set('n', 'S', ':%s/\\<<C-r><C-w>\\>/<C-r>0/g', { noremap = true })
 vim.keymap.set('v', 's', '"0P', { noremap = true })
