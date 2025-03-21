@@ -1,14 +1,14 @@
-vim.opt.number = true        
+vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.tabstop = 4          
-vim.opt.shiftwidth = 4       
-vim.opt.expandtab = true     
-vim.opt.smartindent = true   
-vim.opt.wrap = false         
-vim.opt.ignorecase = true    
-vim.opt.smartcase = true     
-vim.opt.cursorline = true    
-vim.opt.termguicolors = true 
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+vim.opt.wrap = false
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.cursorline = true
+vim.opt.termguicolors = true
 vim.opt.splitright = true
 vim.opt.virtualedit = all
 vim.opt.scrolloff = 3
@@ -17,7 +17,7 @@ vim.opt.autowrite = true
 vim.opt.textwidth = 80
 
 vim.g.mapleader = " "
-vim.g.maplocaleader="<cr>"
+vim.g.maplocalleader="\r"
 vim.keymap.set('n', '<leader>h', '<c-w>h', { noremap = true})
 vim.keymap.set('n', '<leader>j', '<c-w>j', { noremap = true})
 vim.keymap.set('n', '<leader>k', '<c-w>k', { noremap = true})
@@ -31,7 +31,7 @@ vim.keymap.set('n', '<localleader>f', ':grep! "\b<C-r><C-W>\b"<cr>:cw<cr>', { no
 vim.keymap.set('n', 's', 'diw"0P', { noremap = true })
 vim.keymap.set('n', 'S', ':%s/\\<<C-r><C-w>\\>/<C-r>0/g', { noremap = true })
 vim.keymap.set('v', 's', '"0P', { noremap = true })
-vim.keymap.set('i', 'jk', '<Esc>', { noremap = true }) 
+vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
 vim.keymap.set('n', '<c-p>', ':Files<CR>', { silent = true, noremap = true })
 if vim.fn.executable('fdfind') == 1 then
     vim.env.FZF_DEFAULT_COMMAND='fdfind --type f'
@@ -44,3 +44,12 @@ vim.lsp.inlay_hint.enable(true)
 require("config.lazy")
 require'lspconfig'.kotlin_language_server.setup{}
 
+vim.api.nvim_create_augroup('squash', { clear = true })
+
+vim.api.nvim_create_autocmd('FileType', {
+    group = 'squash',
+    pattern = 'gitrebase',
+    callback = function()
+        vim.api.nvim_buf_set_keymap(0, 'n', '<localleader>s', ':2,$s/^pick\\>/fixup/e | :1s/^pick\\>/reword/e<CR>', { noremap = true, silent = true })
+    end,
+})
