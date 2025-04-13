@@ -33,6 +33,8 @@ vim.keymap.set('n', 'S', ':%s/\\<<C-r><C-w>\\>/<C-r>0/g', { noremap = true })
 vim.keymap.set('v', 's', '"0P', { noremap = true })
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
 vim.keymap.set('n', '<c-p>', ':Files<CR>', { silent = true, noremap = true })
+vim.keymap.set('n', 'ci%', [[:s/<C-r><C-w>/\=expand('%:t:r')<CR>]], { noremap = true, silent = true })
+
 if vim.fn.executable('fdfind') == 1 then
     vim.env.FZF_DEFAULT_COMMAND='fdfind --type f'
 elseif vim.fn.executable('fd') == 1 then
@@ -53,3 +55,4 @@ vim.api.nvim_create_autocmd('FileType', {
         vim.api.nvim_buf_set_keymap(0, 'n', '<localleader>s', ':2,$s/^pick\\>/fixup/e | :1s/^pick\\>/reword/e<CR>', { noremap = true, silent = true })
     end,
 })
+vim.cmd.colorscheme "catppuccin-mocha"
