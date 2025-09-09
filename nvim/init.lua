@@ -41,7 +41,9 @@ elseif vim.fn.executable('fd') == 1 then
     vim.env.FZF_DEFAULT_COMMAND='fd --type f'
 end
 
-vim.lsp.inlay_hint.enable(true)
+if vim.fn.has('nvim-0.10') == 1 then
+    vim.lsp.inlay_hint.enable(true)
+end
 
 require("config.lazy")
 require'lspconfig'.kotlin_language_server.setup{}
