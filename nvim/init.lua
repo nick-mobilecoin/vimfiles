@@ -48,7 +48,6 @@ if vim.fn.has('nvim-0.10') == 1 then
 end
 
 require("config.lazy")
-require'lspconfig'.kotlin_language_server.setup{}
 
 vim.api.nvim_create_augroup('squash', { clear = true })
 
