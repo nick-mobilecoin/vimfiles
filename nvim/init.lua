@@ -36,6 +36,7 @@ vim.keymap.set('v', 's', '"0P', { noremap = true })
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
 vim.keymap.set('n', '<c-p>', ':Files<CR>', { silent = true, noremap = true })
 vim.keymap.set('n', 'ci%', [[:s/<C-r><C-w>/\=expand('%:t:r')<CR>]], { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>nf', ':NvimTreeToggle<CR>', { noremap = true })
 
 if vim.fn.executable('fdfind') == 1 then
     vim.env.FZF_DEFAULT_COMMAND='fdfind --type f'
